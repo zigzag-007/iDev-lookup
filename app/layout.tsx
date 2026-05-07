@@ -1,8 +1,14 @@
 import type { Metadata, Viewport } from "next"
-import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google"
+import { Inter, JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+})
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -70,7 +76,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${plusJakartaSans.variable} ${jetBrainsMono.variable} bg-background`}
+      className={`${inter.variable} ${plusJakartaSans.variable} ${jetBrainsMono.variable} bg-background`}
     >
       <body suppressHydrationWarning className="font-sans antialiased min-h-dvh">
         <ThemeProvider

@@ -72,7 +72,8 @@
 }
 
 @theme inline {
-  --font-sans: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans Fallback', system-ui, sans-serif;
+  --font-sans: var(--font-inter), 'Inter Fallback', system-ui, sans-serif;
+  --font-display: var(--font-plus-jakarta-sans), 'Plus Jakarta Sans Fallback', system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono Fallback', ui-monospace, monospace;
 
   --color-background: var(--background);
@@ -162,6 +163,14 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: 'cv11', 'ss01';
+  }
+
+  h1,
+  h2,
+  h3,
+  .font-display {
+    font-family: var(--font-display);
+    letter-spacing: -0.015em;
   }
 
   /* Smooth color-scheme transition when toggling themes */
