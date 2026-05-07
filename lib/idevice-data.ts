@@ -10,6 +10,7 @@ export interface DeviceRecord {
   model: string | null
   emc: string | null
   signedIOS: string | null
+  signedFirmwareFile: string | null
   everyMacUrl: string
   firmwareUrl: string
   fmiUrl: string

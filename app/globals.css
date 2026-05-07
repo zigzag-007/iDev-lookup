@@ -110,6 +110,26 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+@keyframes footer-heartbeat-glow {
+  0%,
+  100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px rgba(244, 63, 94, 0.45));
+  }
+  35% {
+    transform: scale(1.08);
+    filter: drop-shadow(0 0 6px rgba(244, 63, 94, 0.8));
+  }
+  70% {
+    transform: scale(0.98);
+    filter: drop-shadow(0 0 3px rgba(244, 63, 94, 0.55));
+  }
+}
+
+.footer-heart-glow {
+  animation: footer-heartbeat-glow 1.9s ease-in-out infinite;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

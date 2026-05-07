@@ -93,7 +93,7 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
               className="text-primary hover:underline"
               title={record.firmwareUrl}
             >
-              ipsw.me/{record.identifier}
+              {record.signedFirmwareFile ?? `ipsw.me/${record.identifier}/`}
             </Link>
           </Row>
           <Row label="Signed iOS">

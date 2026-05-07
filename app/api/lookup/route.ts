@@ -147,6 +147,7 @@ async function fetchEveryMac(identifier: string): Promise<EveryMacResult> {
 interface IpswResult {
   pageUrl: string
   signedIOS: string | null
+  signedFirmwareFile: string | null
   deviceName: string | null
 }
 
@@ -155,19 +156,25 @@ async function fetchIpsw(identifier: string): Promise<IpswResult> {
   try {
     const apiUrl = `${IPSW_API}${encodeURIComponent(identifier)}?type=ipsw`
     const res = await fetchWithTimeout(apiUrl)
-    if (!res.ok) return { pageUrl, signedIOS: null, deviceName: null }
+    if (!res.ok) {
+      return { pageUrl, signedIOS: null, signedFirmwareFile: null, deviceName: null }
+    }
     const data = (await res.json()) as {
       name?: string
-      firmwares?: Array<{ version?: string; signed?: boolean }>
+      firmwares?: Array<{ version?: string; signed?: boolean; url?: string }>
     }
     const signed = (data.firmwares ?? []).find((f) => f.signed)
+    const signedFirmwareFile = signed?.url
+      ? decodeURIComponent(signed.url.split("/").pop() ?? "")
+      : null
     return {
       pageUrl,
       signedIOS: signed?.version ?? null,
+      signedFirmwareFile: signedFirmwareFile || null,
       deviceName: data?.name ?? null,
     }
   } catch {
-    return { pageUrl, signedIOS: null, deviceName: null }
+    return { pageUrl, signedIOS: null, signedFirmwareFile: null, deviceName: null }
   }
 }
 
@@ -203,7 +210,7 @@ export async function GET(request: Request) {
   const ipsw =
     ipswResult.status === "fulfilled"
       ? ipswResult.value
-      : { pageUrl: buildIpswPageUrl(identifier), signedIOS: null, deviceName: null }
+      : { pageUrl: buildIpswPageUrl(identifier), signedIOS: null, signedFirmwareFile: null, deviceName: null }
 
   const device = everyMac?.device ?? ipsw.deviceName
   const model = everyMac?.model ?? null
@@ -224,6 +231,7 @@ export async function GET(request: Request) {
     model,
     emc: everyMac?.emc ?? null,
     signedIOS: ipsw.signedIOS,
+    signedFirmwareFile: ipsw.signedFirmwareFile,
     everyMacUrl:
       everyMac?.url ?? buildEveryMacUrl(identifier),
     firmwareUrl: ipsw.pageUrl,
