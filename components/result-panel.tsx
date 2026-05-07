@@ -87,11 +87,11 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
           </Row>
           <Row label="Firmware">
             <Link
-              href={record.firmwareUrl}
+              href={record.signedFirmwareDownloadUrl ?? record.firmwareUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary hover:underline"
-              title={record.firmwareUrl}
+              title={record.signedFirmwareDownloadUrl ?? record.firmwareUrl}
             >
               {record.signedFirmwareFile ?? `ipsw.me/${record.identifier}/`}
             </Link>

@@ -160,6 +160,7 @@ interface IpswResult {
   pageUrl: string
   signedIOS: string | null
   signedFirmwareFile: string | null
+  signedFirmwareDownloadUrl: string | null
   deviceName: string | null
 }
 
@@ -169,24 +170,45 @@ async function fetchIpsw(identifier: string): Promise<IpswResult> {
     const apiUrl = `${IPSW_API}${encodeURIComponent(identifier)}?type=ipsw`
     const res = await fetchWithTimeout(apiUrl)
     if (!res.ok) {
-      return { pageUrl, signedIOS: null, signedFirmwareFile: null, deviceName: null }
+      return {
+        pageUrl,
+        signedIOS: null,
+        signedFirmwareFile: null,
+        signedFirmwareDownloadUrl: null,
+        deviceName: null,
+      }
     }
     const data = (await res.json()) as {
       name?: string
-      firmwares?: Array<{ version?: string; signed?: boolean; url?: string }>
+      firmwares?: Array<{
+        version?: string
+        signed?: boolean
+        url?: string
+        buildid?: string
+      }>
     }
     const signed = (data.firmwares ?? []).find((f) => f.signed)
     const signedFirmwareFile = signed?.url
       ? decodeURIComponent(signed.url.split("/").pop() ?? "")
       : null
+    const signedFirmwareDownloadUrl = signed?.buildid
+      ? `https://ipsw.me/download/${encodeIdentifierForPath(identifier)}/${signed.buildid}/`
+      : null
     return {
       pageUrl,
       signedIOS: signed?.version ?? null,
       signedFirmwareFile: signedFirmwareFile || null,
+      signedFirmwareDownloadUrl,
       deviceName: data?.name ?? null,
     }
   } catch {
-    return { pageUrl, signedIOS: null, signedFirmwareFile: null, deviceName: null }
+    return {
+      pageUrl,
+      signedIOS: null,
+      signedFirmwareFile: null,
+      signedFirmwareDownloadUrl: null,
+      deviceName: null,
+    }
   }
 }
 
@@ -222,7 +244,13 @@ export async function GET(request: Request) {
   const ipsw =
     ipswResult.status === "fulfilled"
       ? ipswResult.value
-      : { pageUrl: buildIpswPageUrl(identifier), signedIOS: null, signedFirmwareFile: null, deviceName: null }
+      : {
+          pageUrl: buildIpswPageUrl(identifier),
+          signedIOS: null,
+          signedFirmwareFile: null,
+          signedFirmwareDownloadUrl: null,
+          deviceName: null,
+        }
 
   const device = everyMac?.device ?? ipsw.deviceName
   const model = everyMac?.model ?? null
@@ -244,6 +272,7 @@ export async function GET(request: Request) {
     emc: everyMac?.emc ?? null,
     signedIOS: ipsw.signedIOS,
     signedFirmwareFile: ipsw.signedFirmwareFile,
+    signedFirmwareDownloadUrl: ipsw.signedFirmwareDownloadUrl,
     everyMacUrl:
       everyMac?.url ?? buildEveryMacUrl(identifier),
     firmwareUrl: ipsw.pageUrl,
