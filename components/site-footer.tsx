@@ -5,7 +5,7 @@ export function SiteFooter() {
     <footer className="border-t border-border bg-background">
       <div className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <p className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 text-center text-[15px] sm:text-base font-semibold text-muted-foreground/80 transition-opacity hover:text-muted-foreground">
-          <span>Copyright &copy; 2026 iDevice Model Identifier.</span>
+          <span>Copyright &copy; 2026 iDev Lookup.</span>
           <span>All Rights Reserved.</span>
           <span className="inline-flex items-center gap-1">
             <span>Made with</span>

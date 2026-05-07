@@ -14,7 +14,7 @@ interface Feature {
 const FEATURES: Feature[] = [
   {
     icon: <Search className="size-5" aria-hidden="true" />,
-    title: "Identify Any iDevice",
+    title: "Identify Any Apple Device",
     description:
       "Enter an identifier like iPhone9,2 to get detailed information about the device including model, EMC, and more.",
     tone: "blue",

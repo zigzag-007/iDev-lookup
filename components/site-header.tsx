@@ -33,7 +33,7 @@ export function SiteHeader() {
           >
             <Smartphone className="size-4" />
           </span>
-          <span className="text-base sm:text-lg">iDevice Model Identifier</span>
+          <span className="text-base sm:text-lg">iDev Lookup</span>
         </Link>
 
         {/* Desktop nav */}
@@ -78,7 +78,7 @@ export function SiteHeader() {
             type="button"
             className="inline-flex size-10 items-center justify-center rounded-md border border-border bg-card text-foreground md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
+            aria-expanded={mobileOpen ? "true" : "false"}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen((v) => !v)}
           >

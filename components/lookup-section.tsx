@@ -130,7 +130,7 @@ export function LookupSection() {
             id="lookup-heading"
             className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance"
           >
-            iDevice Model Lookup
+            iDev Lookup
           </h1>
           <p className="mt-2 text-sm text-muted-foreground sm:text-base text-pretty">
             Resolve identifiers like{" "}

@@ -24,11 +24,11 @@ const jetBrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "iDevice Model Identifier — Lookup Apple device identifiers",
-    template: "%s · iDevice Model Identifier",
+    default: "iDev Lookup - Find Apple device identifiers fast",
+    template: "%s · iDev Lookup",
   },
   description:
-    "Resolve Apple device identifiers like iPhone16,2 and jump to firmware tools, EveryMac, and FMI checker — fast, free, and developer-friendly.",
+    "Resolve Apple device identifiers like iPhone16,2 and jump to firmware tools, EveryMac, and FMI checker quickly.",
   keywords: [
     "iDevice",
     "Apple",
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Zig Zag" }],
   generator: "v0.app",
   openGraph: {
-    title: "iDevice Model Identifier",
+    title: "iDev Lookup",
     description:
       "Resolve identifiers like iPhone9,2 and jump to firmware tools.",
     type: "website",
