@@ -57,7 +57,7 @@ export function FeatureCards() {
         {FEATURES.map((feature) => (
           <li
             key={feature.title}
-            className="rounded-xl border border-border bg-card p-5 sm:p-6"
+            className="glass-panel hover-lift rounded-xl border border-border bg-card p-5 sm:p-6"
           >
             <div className="flex items-start gap-4">
               <span

@@ -153,7 +153,7 @@ export function LookupSection() {
         <div className="flex flex-col gap-4">
           <form
             onSubmit={handleSubmit}
-            className="rounded-xl border border-border bg-card p-5 sm:p-6"
+            className="glass-panel rounded-xl border border-border bg-card p-5 sm:p-6"
             noValidate
           >
             <label
@@ -184,7 +184,7 @@ export function LookupSection() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-70 xl:flex-none"
+                  className="cta-sheen inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-70 xl:flex-none"
                 >
                   {isLoading ? (
                     <>
@@ -285,7 +285,7 @@ function StatusBanner({ status }: { status: Status }) {
       <div
         role="status"
         aria-live="polite"
-        className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
+        className="glass-panel flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
       >
         <Loader2
           className="size-5 shrink-0 animate-spin text-primary"
@@ -308,7 +308,7 @@ function StatusBanner({ status }: { status: Status }) {
       <div
         role="status"
         aria-live="polite"
-        className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
+        className="glass-panel flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
       >
         <CheckCircle2
           className="size-5 shrink-0 text-success"
@@ -362,7 +362,7 @@ function QuickAction({
   disabled?: boolean
 }) {
   const className = cn(
-    "inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-card text-sm font-medium text-foreground shadow-sm transition-colors",
+    "glass-panel hover-lift inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-card text-sm font-medium text-foreground shadow-sm transition-colors",
     disabled || !href
       ? "cursor-not-allowed opacity-50"
       : "hover:bg-accent hover:text-foreground",

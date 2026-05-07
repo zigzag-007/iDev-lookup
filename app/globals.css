@@ -162,6 +162,54 @@
   animation: ambient-grid-drift 26s linear infinite;
 }
 
+.glass-panel {
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+}
+
+.dark .glass-panel {
+  background: rgba(12, 18, 40, 0.62);
+  border: 1px solid rgba(92, 118, 180, 0.32);
+  box-shadow: 0 16px 40px rgba(2, 8, 23, 0.4);
+}
+
+.hover-lift {
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.cta-sheen {
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-sheen::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: -35%;
+  width: 28%;
+  height: 320%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.28) 46%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(22deg);
+  transition: transform 650ms ease;
+}
+
+.cta-sheen:hover::after {
+  transform: translateX(380%) rotate(22deg);
+}
+
 .dark .ambient-grid {
   background-image:
     radial-gradient(circle at 15% 15%, rgba(89, 165, 255, 0.1), transparent 38%),

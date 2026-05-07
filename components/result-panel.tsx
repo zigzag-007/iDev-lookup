@@ -32,7 +32,7 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
       aria-labelledby="result-heading"
       aria-busy={loading || undefined}
       className={cn(
-        "h-full rounded-xl border border-border bg-card p-5 sm:p-6",
+        "glass-panel h-full rounded-xl border border-border bg-card p-5 sm:p-6",
         className,
       )}
     >
