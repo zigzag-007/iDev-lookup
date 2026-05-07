@@ -151,6 +151,16 @@
   animation: author-heartbeat-glow 1.8s ease-in-out infinite;
 }
 
+.ambient-grid {
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(89, 165, 255, 0.08), transparent 38%),
+    radial-gradient(circle at 82% 10%, rgba(149, 109, 255, 0.08), transparent 34%),
+    linear-gradient(rgba(122, 145, 199, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 145, 199, 0.08) 1px, transparent 1px);
+  background-size: auto, auto, 34px 34px, 34px 34px;
+  background-position: center, center, center, center;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

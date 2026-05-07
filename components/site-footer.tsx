@@ -10,7 +10,7 @@ export function SiteFooter() {
           <span className="inline-flex items-center gap-1">
             <span>Made with</span>
             <Heart
-              className="footer-heart-glow size-3 text-rose-500"
+              className="footer-heart-glow size-4 text-rose-500"
               aria-hidden="true"
             />
             <span>by Zig Zag</span>
