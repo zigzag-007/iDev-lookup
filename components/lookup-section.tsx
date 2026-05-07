@@ -121,7 +121,7 @@ export function LookupSection() {
     <section
       id="home"
       aria-labelledby="lookup-heading"
-      className="mx-auto w-full max-w-7xl px-4 pt-10 sm:px-6 lg:px-8 lg:pt-14"
+      className="mx-auto w-full max-w-7xl px-4 pt-5 sm:px-6 lg:px-8 lg:pt-5"
     >
       {/* Title row */}
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
