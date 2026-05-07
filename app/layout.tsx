@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     template: "%s · iDev Lookup",
   },
   description:
-    "Resolve Apple device identifiers like iPhone16,2 and jump to firmware tools, EveryMac, and FMI checker quickly.",
+    "Resolve Apple device identifiers like iPhone18,3 and jump to firmware tools, EveryMac, and FMI checker quickly.",
   keywords: [
     "iDevice",
     "Apple",
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "iDev Lookup",
     description:
-      "Resolve identifiers like iPhone9,2 and jump to firmware tools.",
+      "Resolve identifiers like iPhone18,3 and jump to firmware tools.",
     type: "website",
   },
   icons: {

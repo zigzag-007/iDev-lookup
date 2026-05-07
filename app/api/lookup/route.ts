@@ -128,7 +128,13 @@ async function fetchEveryMac(identifier: string): Promise<EveryMacResult> {
     /<td class="detail_title">\s*<a[^>]*>\s*([^<]+)/i,
   )
   const text = stripHtml(html)
-  const modelMatch = text.match(/Model\s+(A[\w-]+)\s*\(EMC\s*([^)]+)\)/i)
+  // EveryMac often appends footnote markers like "*" (e.g. A3258*, EMC 8947*).
+  // Parse model/emc defensively and strip marker characters.
+  const modelEmcMatch = text.match(
+    /Model\s+(A[\w*-]+)\s*\(EMC\s*([^)]+?)\)/i,
+  )
+  const modelOnlyMatch = text.match(/Model\s+(A[\w*-]+)/i)
+  const emcOnlyMatch = text.match(/EMC\s*([0-9*]+)/i)
   const familyRegex = new RegExp(
     `Family\\s+([A-Za-z0-9\\s+\\-]+?)\\s+ID\\s+${escapeRegex(identifier)}`,
     "i",
@@ -138,8 +144,14 @@ async function fetchEveryMac(identifier: string): Promise<EveryMacResult> {
   return {
     url,
     device: deviceMatch ? deviceMatch[1].trim() : null,
-    model: modelMatch ? modelMatch[1].trim() : null,
-    emc: modelMatch ? modelMatch[2].trim() : null,
+    model: (modelEmcMatch?.[1] ?? modelOnlyMatch?.[1] ?? null)?.replace(
+      /\*+$/g,
+      "",
+    ),
+    emc: (modelEmcMatch?.[2] ?? emcOnlyMatch?.[1] ?? null)?.replace(
+      /\*+$/g,
+      "",
+    ),
     family: familyMatch ? familyMatch[1].trim() : null,
   }
 }

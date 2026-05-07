@@ -19,7 +19,7 @@ export interface DeviceRecord {
 export const EXAMPLE_IDENTIFIERS = [
   "iPhone9,2",
   "iPad16,10",
-  "Watch6,9",
+  "Watch5,4",
   "AppleTV5,3",
 ] as const
 

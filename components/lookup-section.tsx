@@ -28,7 +28,7 @@ type Status =
   | { kind: "copied"; record: DeviceRecord; value: string }
   | { kind: "error"; message: string }
 
-const INITIAL_QUERY = "iPhone16,2"
+const INITIAL_QUERY = "iPhone18,3"
 
 export function LookupSection() {
   const [query, setQuery] = React.useState(INITIAL_QUERY)
@@ -134,7 +134,7 @@ export function LookupSection() {
           </h1>
           <p className="mt-2 text-sm text-muted-foreground sm:text-base text-pretty">
             Resolve identifiers like{" "}
-            <span className="font-mono">iPhone9,2</span> and jump to firmware
+            <span className="font-mono">iPhone18,3</span> and jump to firmware
             tools.
           </p>
         </div>
@@ -175,7 +175,7 @@ export function LookupSection() {
                 spellCheck={false}
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
-                placeholder="e.g. iPhone16,2"
+                placeholder="e.g. iPhone18,3"
                 aria-describedby="identifier-help"
                 className="min-w-0 flex-1 rounded-lg border border-border bg-background px-4 py-2.5 font-mono text-sm text-foreground shadow-sm outline-none ring-ring/50 transition-colors placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2"
               />
