@@ -19,6 +19,9 @@ export function SiteHeader() {
             <Smartphone className="size-4" />
           </span>
           <span className="text-base sm:text-lg">iDev Lookup</span>
+          <span className="rounded-full border border-border bg-card px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+            v0.9.1
+          </span>
         </Link>
 
         <div className="flex items-center gap-2">
