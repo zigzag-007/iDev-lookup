@@ -159,6 +159,49 @@
     linear-gradient(90deg, rgba(122, 145, 199, 0.08) 1px, transparent 1px);
   background-size: auto, auto, 34px 34px, 34px 34px;
   background-position: center, center, center, center;
+  animation: ambient-grid-drift 26s linear infinite;
+}
+
+.dark .ambient-grid {
+  background-image:
+    radial-gradient(circle at 15% 15%, rgba(89, 165, 255, 0.1), transparent 38%),
+    radial-gradient(circle at 82% 10%, rgba(149, 109, 255, 0.1), transparent 34%),
+    linear-gradient(rgba(122, 145, 199, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(122, 145, 199, 0.1) 1px, transparent 1px);
+}
+
+.ambient-aurora {
+  background:
+    radial-gradient(48% 52% at 14% 18%, rgba(56, 189, 248, 0.2) 0%, rgba(56, 189, 248, 0) 70%),
+    radial-gradient(52% 56% at 86% 14%, rgba(167, 139, 250, 0.18) 0%, rgba(167, 139, 250, 0) 72%),
+    radial-gradient(45% 50% at 76% 82%, rgba(99, 102, 241, 0.16) 0%, rgba(99, 102, 241, 0) 72%);
+  filter: blur(8px);
+  animation: ambient-aurora-float 20s ease-in-out infinite alternate;
+}
+
+.dark .ambient-aurora {
+  background:
+    radial-gradient(48% 52% at 14% 18%, rgba(56, 189, 248, 0.24) 0%, rgba(56, 189, 248, 0) 70%),
+    radial-gradient(52% 56% at 86% 14%, rgba(167, 139, 250, 0.22) 0%, rgba(167, 139, 250, 0) 72%),
+    radial-gradient(45% 50% at 76% 82%, rgba(99, 102, 241, 0.2) 0%, rgba(99, 102, 241, 0) 72%);
+}
+
+@keyframes ambient-aurora-float {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  100% {
+    transform: translate3d(1.5%, -1.2%, 0) scale(1.07);
+  }
+}
+
+@keyframes ambient-grid-drift {
+  0% {
+    background-position: center, center, 0 0, 0 0;
+  }
+  100% {
+    background-position: center, center, 34px 34px, 34px 34px;
+  }
 }
 
 @layer base {

@@ -10,6 +10,10 @@ export default function HomePage() {
         aria-hidden="true"
         className="ambient-grid pointer-events-none absolute inset-0 -z-10 opacity-80"
       />
+      <div
+        aria-hidden="true"
+        className="ambient-aurora pointer-events-none absolute inset-0 -z-10 opacity-90"
+      />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-20 left-1/2 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-blue-500/12 blur-[120px]" />
         <div className="absolute top-64 -left-20 h-80 w-80 rounded-full bg-violet-500/12 blur-[120px]" />
