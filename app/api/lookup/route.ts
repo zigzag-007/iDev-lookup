@@ -35,6 +35,9 @@ function buildEveryMacUrl(identifier: string): string {
 }
 
 function buildIpswPageUrl(identifier: string): string {
+  if (/^Watch\d+,\d+$/i.test(identifier)) {
+    return `${IPSW_PAGE}otas/${encodeIdentifierForPath(identifier)}/`
+  }
   return `${IPSW_PAGE}${encodeIdentifierForPath(identifier)}/`
 }
 
@@ -166,8 +169,10 @@ interface IpswResult {
 
 async function fetchIpsw(identifier: string): Promise<IpswResult> {
   const pageUrl = buildIpswPageUrl(identifier)
+  const isWatch = /^Watch\d+,\d+$/i.test(identifier)
   try {
-    const apiUrl = `${IPSW_API}${encodeURIComponent(identifier)}?type=ipsw`
+    const firmwareType = isWatch ? "ota" : "ipsw"
+    const apiUrl = `${IPSW_API}${encodeURIComponent(identifier)}?type=${firmwareType}`
     const res = await fetchWithTimeout(apiUrl)
     if (!res.ok) {
       return {
@@ -192,7 +197,9 @@ async function fetchIpsw(identifier: string): Promise<IpswResult> {
       ? decodeURIComponent(signed.url.split("/").pop() ?? "")
       : null
     const signedFirmwareDownloadUrl = signed?.buildid
-      ? `https://ipsw.me/download/${encodeIdentifierForPath(identifier)}/${signed.buildid}/`
+      ? isWatch
+        ? `https://ipsw.me/download/ota/${encodeIdentifierForPath(identifier)}/${signed.buildid}/`
+        : `https://ipsw.me/download/${encodeIdentifierForPath(identifier)}/${signed.buildid}/`
       : null
     return {
       pageUrl,
