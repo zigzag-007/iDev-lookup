@@ -6,6 +6,7 @@ import {
   CheckCircle2,
   Copy,
   Download,
+  Heart,
   Loader2,
   Monitor,
   ShieldCheck,
@@ -137,9 +138,12 @@ export function LookupSection() {
             tools.
           </p>
         </div>
-        <p className="text-xs text-muted-foreground">
-          Coded by{" "}
-          <span className="font-medium text-foreground">Zig Zag</span>
+        <p className="inline-flex w-fit items-center gap-1.5 self-start rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground shadow-sm sm:self-auto">
+          <span className="uppercase tracking-wide text-[10px] text-muted-foreground/80">
+            Crafted by
+          </span>
+          <span className="font-semibold text-foreground">Zig Zag</span>
+          <Heart className="author-heart-glow size-3 text-rose-500" aria-hidden="true" />
         </p>
       </div>
 
