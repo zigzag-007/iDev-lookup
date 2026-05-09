@@ -64,7 +64,7 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
     <section
       aria-labelledby="result-heading"
       className={cn(
-        "glass-panel card-spotlight h-full rounded-2xl border border-border bg-card p-4 sm:p-5",
+        "glass-panel card-spotlight flex h-full min-h-[24rem] flex-col rounded-2xl border border-border bg-card p-4 sm:p-5",
         className,
       )}
     >
@@ -173,7 +173,7 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
           </Row>
         </dl>
       ) : (
-        <div className="flex h-full min-h-[18rem] flex-col items-center justify-center py-6 text-center">
+        <div className="flex flex-1 items-center justify-center py-6 text-center">
           <p className="max-w-xs text-sm text-muted-foreground text-pretty">
             Enter an Apple device identifier on the left to see detailed model
             information here.

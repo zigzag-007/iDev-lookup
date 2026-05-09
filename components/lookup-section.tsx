@@ -7,6 +7,7 @@ import {
   Copy,
   Download,
   Heart,
+  Info,
   Loader2,
   Monitor,
   Search,
@@ -297,7 +298,19 @@ export function LookupSection() {
 /* ---------- Sub-components ---------- */
 
 function StatusBanner({ status }: { status: Status }) {
-  if (status.kind === "idle") return null
+  if (status.kind === "idle") {
+    return (
+      <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-card/60 px-4 py-3">
+        <Info
+          className="size-5 shrink-0 text-muted-foreground/60"
+          aria-hidden="true"
+        />
+        <p className="text-sm text-muted-foreground">
+          Enter an Apple device identifier above to begin.
+        </p>
+      </div>
+    )
+  }
 
   if (status.kind === "loading") {
     return (
