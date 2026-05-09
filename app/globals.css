@@ -151,6 +151,46 @@
   animation: author-heartbeat-glow 1.8s ease-in-out infinite;
 }
 
+@keyframes version-badge-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(59, 130, 246, 0.22),
+      0 0 10px rgba(56, 189, 248, 0.12),
+      0 0 20px rgba(99, 102, 241, 0.06);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(96, 165, 250, 0.42),
+      0 0 18px rgba(56, 189, 248, 0.28),
+      0 0 32px rgba(129, 140, 248, 0.18);
+  }
+}
+
+.version-badge-pulse {
+  animation: version-badge-pulse 2.6s ease-in-out infinite;
+}
+
+.dark .version-badge-pulse {
+  animation: version-badge-pulse-dark 2.6s ease-in-out infinite;
+}
+
+@keyframes version-badge-pulse-dark {
+  0%,
+  100% {
+    box-shadow:
+      0 0 0 1px rgba(96, 165, 250, 0.28),
+      0 0 14px rgba(56, 189, 248, 0.22),
+      0 0 26px rgba(129, 140, 248, 0.12);
+  }
+  50% {
+    box-shadow:
+      0 0 0 1px rgba(147, 197, 253, 0.48),
+      0 0 22px rgba(56, 189, 248, 0.38),
+      0 0 40px rgba(165, 180, 252, 0.22);
+  }
+}
+
 .ambient-grid {
   background-image:
     radial-gradient(circle at 15% 15%, rgba(89, 165, 255, 0.08), transparent 38%),

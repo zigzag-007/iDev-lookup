@@ -22,7 +22,10 @@ export function SiteHeader() {
             <Smartphone className="size-4" />
           </span>
           <span className="text-base sm:text-lg">iDev Lookup</span>
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-500/35 bg-rose-500/10 px-2.5 py-1 text-xs font-semibold text-rose-700 shadow-[0_0_0_1px_rgba(244,63,94,0.08),0_0_14px_rgba(244,63,94,0.22)] dark:text-rose-200">
+          <span
+            className="version-badge-pulse inline-flex items-center rounded-full border border-primary/35 bg-primary/10 px-2.5 py-1 text-xs font-semibold tabular-nums tracking-wide text-primary backdrop-blur-sm dark:border-primary/50 dark:bg-primary/15"
+            title={`iDev Lookup ${appVersion}`}
+          >
             {appVersion}
           </span>
         </Link>
