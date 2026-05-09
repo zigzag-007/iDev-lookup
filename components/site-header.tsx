@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Heart, Smartphone } from "lucide-react"
+import { Smartphone } from "lucide-react"
 import packageJson from "@/package.json"
 import { ThemeToggle } from "@/components/theme-toggle"
 
@@ -23,10 +23,6 @@ export function SiteHeader() {
           </span>
           <span className="text-base sm:text-lg">iDev Lookup</span>
           <span className="inline-flex items-center gap-1.5 rounded-full border border-rose-500/35 bg-rose-500/10 px-2.5 py-1 text-xs font-semibold text-rose-700 shadow-[0_0_0_1px_rgba(244,63,94,0.08),0_0_14px_rgba(244,63,94,0.22)] dark:text-rose-200">
-            <Heart
-              className="size-3 fill-rose-500 text-rose-500 drop-shadow-[0_0_6px_rgba(244,63,94,0.9)]"
-              aria-hidden="true"
-            />
             {appVersion}
           </span>
         </Link>
