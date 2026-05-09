@@ -53,6 +53,7 @@ export function LookupSection() {
     const controller = new AbortController()
     abortRef.current = controller
 
+    setRecord(null)
     setStatus({ kind: "loading", identifier: trimmed })
 
     try {
@@ -158,7 +159,7 @@ export function LookupSection() {
       </div>
 
       {/* Two-column grid */}
-      <div className="mt-4 grid grid-cols-1 gap-4 sm:mt-5 lg:grid-cols-2 lg:gap-6">
+      <div className="mt-4 grid grid-cols-1 items-stretch gap-4 sm:mt-5 lg:grid-cols-2 lg:gap-6">
         {/* Left: form + actions */}
         <div className="flex flex-col gap-3 animate-fade-up delay-75">
           <form
@@ -285,8 +286,8 @@ export function LookupSection() {
         </div>
 
         {/* Right: result panel */}
-        <div className="animate-fade-up delay-150">
-          <ResultPanel record={record} loading={isLoading} />
+        <div className="flex animate-fade-up flex-col delay-150 lg:h-full">
+          <ResultPanel record={record} loading={isLoading} className="flex-1" />
         </div>
       </div>
     </section>

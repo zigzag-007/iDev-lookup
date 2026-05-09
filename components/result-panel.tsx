@@ -100,7 +100,18 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
         ) : null}
       </header>
 
-      {record ? (
+      {loading ? (
+        <dl className="divide-y divide-border/40 pt-1">
+          <SkeletonRow label="Device" />
+          <SkeletonRow label="Identifier" />
+          <SkeletonRow label="Family" />
+          <SkeletonRow label="Model" />
+          <SkeletonRow label="EMC" />
+          <SkeletonRow label="EveryMac" />
+          <SkeletonRow label="Firmware" />
+          <SkeletonRow label="Signed iOS" />
+        </dl>
+      ) : record ? (
         <dl className="divide-y divide-border/40 pt-1">
           <Row label="Device">
             <span className="text-primary">{record.device}</span>
@@ -161,19 +172,8 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
             )}
           </Row>
         </dl>
-      ) : loading ? (
-        <dl className="divide-y divide-border/40 pt-1">
-          <SkeletonRow label="Device" />
-          <SkeletonRow label="Identifier" />
-          <SkeletonRow label="Family" />
-          <SkeletonRow label="Model" />
-          <SkeletonRow label="EMC" />
-          <SkeletonRow label="EveryMac" />
-          <SkeletonRow label="Firmware" />
-          <SkeletonRow label="Signed iOS" />
-        </dl>
       ) : (
-        <div className="flex h-full min-h-[11rem] items-center justify-center py-6 text-center sm:min-h-[12rem]">
+        <div className="flex h-full min-h-[18rem] flex-col items-center justify-center py-6 text-center">
           <p className="max-w-xs text-sm text-muted-foreground text-pretty">
             Enter an Apple device identifier on the left to see detailed model
             information here.
