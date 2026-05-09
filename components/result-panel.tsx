@@ -139,7 +139,7 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
               href={record.everyMacUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="whitespace-nowrap text-foreground transition-colors hover:text-primary"
+              className="text-foreground transition-colors hover:text-primary"
               title={record.everyMacUrl}
             >
               {shortHostPath(record.everyMacUrl)}
