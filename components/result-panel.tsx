@@ -35,8 +35,8 @@ function Row({ label, children }: RowProps) {
   return (
     <div className={cn(ROW_CLASS, "rounded-lg transition-colors hover:bg-accent/40")}>
       <dt className={DT_CLASS}>{label}</dt>
-      <dd className="min-w-0 flex h-[1.3125rem] items-center overflow-hidden text-sm font-medium text-foreground tabular-nums">
-        {children}
+      <dd className="no-scrollbar min-w-0 flex h-[1.3125rem] items-center overflow-x-auto text-sm font-medium text-foreground tabular-nums">
+        <span className="whitespace-nowrap">{children}</span>
       </dd>
     </div>
   )
@@ -135,38 +135,34 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
             )}
           </Row>
           <Row label="EveryMac">
-            <div className="no-scrollbar min-w-0 overflow-x-auto">
-              <Link
-                href={record.everyMacUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whitespace-nowrap text-foreground transition-colors hover:text-primary"
-                title={record.everyMacUrl}
-              >
-                {shortHostPath(record.everyMacUrl)}
-              </Link>
-            </div>
+            <Link
+              href={record.everyMacUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground transition-colors hover:text-primary"
+              title={record.everyMacUrl}
+            >
+              {shortHostPath(record.everyMacUrl)}
+            </Link>
           </Row>
           <Row label="Firmware">
-            <div className="no-scrollbar min-w-0 overflow-x-auto">
-              <Link
-                href={
-                  record.signedFirmwareInstallUrl ??
-                  record.signedFirmwareDownloadUrl ??
-                  record.firmwareUrl
-                }
-                target="_blank"
-                rel="noopener noreferrer"
-                className="whitespace-nowrap font-mono text-xs text-primary transition-colors hover:underline"
-                title={
-                  record.signedFirmwareInstallUrl ??
-                  record.signedFirmwareDownloadUrl ??
-                  record.firmwareUrl
-                }
-              >
-                {record.signedFirmwareFile ?? `ipsw.me/${record.identifier}/`}
-              </Link>
-            </div>
+            <Link
+              href={
+                record.signedFirmwareInstallUrl ??
+                record.signedFirmwareDownloadUrl ??
+                record.firmwareUrl
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-xs text-primary transition-colors hover:underline"
+              title={
+                record.signedFirmwareInstallUrl ??
+                record.signedFirmwareDownloadUrl ??
+                record.firmwareUrl
+              }
+            >
+              {record.signedFirmwareFile ?? `ipsw.me/${record.identifier}/`}
+            </Link>
           </Row>
           <Row label="Signed iOS">
             {record.signedIOS ? (
