@@ -503,7 +503,9 @@
   -ms-overflow-style: none; /* IE / Edge legacy */
 }
 .no-scrollbar::-webkit-scrollbar {
-  display: none; /* Chrome / Safari / WebKit */
+  width: 0;
+  height: 0;
+  background: transparent;
 }
 
 /* Focus ring polish */
