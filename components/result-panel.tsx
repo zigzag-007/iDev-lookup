@@ -139,7 +139,7 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
               href={record.everyMacUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground transition-colors hover:text-primary"
+              className="whitespace-nowrap text-foreground transition-colors hover:text-primary"
               title={record.everyMacUrl}
             >
               {shortHostPath(record.everyMacUrl)}
@@ -154,7 +154,7 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
               }
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-xs text-primary transition-colors hover:underline"
+              className="whitespace-nowrap font-mono text-xs text-primary transition-colors hover:underline"
               title={
                 record.signedFirmwareInstallUrl ??
                 record.signedFirmwareDownloadUrl ??
