@@ -163,6 +163,7 @@ interface IpswResult {
   pageUrl: string
   signedIOS: string | null
   signedFirmwareFile: string | null
+  signedFirmwareInstallUrl: string | null
   signedFirmwareDownloadUrl: string | null
   deviceName: string | null
 }
@@ -179,6 +180,7 @@ async function fetchIpsw(identifier: string): Promise<IpswResult> {
         pageUrl,
         signedIOS: null,
         signedFirmwareFile: null,
+        signedFirmwareInstallUrl: null,
         signedFirmwareDownloadUrl: null,
         deviceName: null,
       }
@@ -196,6 +198,9 @@ async function fetchIpsw(identifier: string): Promise<IpswResult> {
     const signedFirmwareFile = signed?.url
       ? decodeURIComponent(signed.url.split("/").pop() ?? "")
       : null
+    const signedFirmwareInstallUrl = signed?.buildid && !isWatch
+      ? `https://ipsw.me/install/${encodeIdentifierForPath(identifier)}/${signed.buildid}/`
+      : null
     const signedFirmwareDownloadUrl = signed?.buildid
       ? isWatch
         ? `https://ipsw.me/download/ota/${encodeIdentifierForPath(identifier)}/${signed.buildid}/`
@@ -205,6 +210,7 @@ async function fetchIpsw(identifier: string): Promise<IpswResult> {
       pageUrl,
       signedIOS: signed?.version ?? null,
       signedFirmwareFile: signedFirmwareFile || null,
+      signedFirmwareInstallUrl,
       signedFirmwareDownloadUrl,
       deviceName: data?.name ?? null,
     }
@@ -213,6 +219,7 @@ async function fetchIpsw(identifier: string): Promise<IpswResult> {
       pageUrl,
       signedIOS: null,
       signedFirmwareFile: null,
+      signedFirmwareInstallUrl: null,
       signedFirmwareDownloadUrl: null,
       deviceName: null,
     }
@@ -255,6 +262,7 @@ export async function GET(request: Request) {
           pageUrl: buildIpswPageUrl(identifier),
           signedIOS: null,
           signedFirmwareFile: null,
+          signedFirmwareInstallUrl: null,
           signedFirmwareDownloadUrl: null,
           deviceName: null,
         }
@@ -279,6 +287,7 @@ export async function GET(request: Request) {
     emc: everyMac?.emc ?? null,
     signedIOS: ipsw.signedIOS,
     signedFirmwareFile: ipsw.signedFirmwareFile,
+    signedFirmwareInstallUrl: ipsw.signedFirmwareInstallUrl,
     signedFirmwareDownloadUrl: ipsw.signedFirmwareDownloadUrl,
     everyMacUrl:
       everyMac?.url ?? buildEveryMacUrl(identifier),
