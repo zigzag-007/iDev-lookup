@@ -6,7 +6,7 @@ import { CursorGlow } from "@/components/cursor-glow"
 
 export default function HomePage() {
   return (
-    <div className="relative flex min-h-dvh flex-col bg-background">
+    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-background">
       <div
         aria-hidden="true"
         className="ambient-grid pointer-events-none absolute inset-0 -z-10 opacity-80"

@@ -513,10 +513,12 @@
   html {
     @apply bg-background;
     scroll-behavior: smooth;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-background text-foreground antialiased;
+    overflow-x: hidden;
     font-feature-settings: 'cv11', 'ss01', 'ss03', 'cv01';
     text-rendering: optimizeLegibility;
   }
