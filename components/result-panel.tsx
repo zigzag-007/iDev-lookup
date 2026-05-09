@@ -26,13 +26,16 @@ const SKELETON_WIDTHS: Record<string, string> = {
   "Signed iOS": "w-20",
 }
 
+const ROW_CLASS =
+  "-mx-2 grid grid-cols-[7rem_1fr] items-center gap-3 px-2 py-[0.4375rem] sm:grid-cols-[8rem_1fr] sm:gap-4"
+const DT_CLASS =
+  "text-xs font-medium uppercase tracking-wider text-muted-foreground"
+
 function Row({ label, children }: RowProps) {
   return (
-    <div className="-mx-2 grid grid-cols-[7rem_1fr] items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-accent/40 sm:grid-cols-[8rem_1fr] sm:gap-4">
-      <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-        {label}
-      </dt>
-      <dd className="min-w-0 text-sm font-medium text-foreground tabular-nums break-words">
+    <div className={cn(ROW_CLASS, "rounded-lg transition-colors hover:bg-accent/40")}>
+      <dt className={DT_CLASS}>{label}</dt>
+      <dd className="min-w-0 flex h-[1.3125rem] items-center text-sm font-medium text-foreground tabular-nums break-words">
         {children}
       </dd>
     </div>
@@ -42,16 +45,11 @@ function Row({ label, children }: RowProps) {
 function SkeletonRow({ label }: { label: string }) {
   const w = SKELETON_WIDTHS[label] ?? "w-32"
   return (
-    <div className="-mx-2 grid grid-cols-[7rem_1fr] items-center gap-3 px-2 py-2 sm:grid-cols-[8rem_1fr] sm:gap-4">
-      <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-        {label}
-      </dt>
-      <dd className="min-w-0">
+    <div className={ROW_CLASS}>
+      <dt className={DT_CLASS}>{label}</dt>
+      <dd className="min-w-0 flex h-[1.3125rem] items-center">
         <span
-          className={cn(
-            "skeleton-shimmer block h-3.5 rounded-full",
-            w,
-          )}
+          className={cn("skeleton-shimmer block h-3.5 rounded-full", w)}
           aria-hidden="true"
         />
       </dd>
@@ -88,16 +86,18 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
             Result
           </h2>
         </div>
-        {loading ? (
-          <Loader2
-            className="size-4 animate-spin text-muted-foreground"
-            aria-hidden="true"
-          />
-        ) : record ? (
-          <span className="rounded-full border border-success/30 bg-success/10 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-success">
-            Live
-          </span>
-        ) : null}
+        <div className="flex h-5 items-center">
+          {loading ? (
+            <Loader2
+              className="size-4 animate-spin text-muted-foreground"
+              aria-hidden="true"
+            />
+          ) : record ? (
+            <span className="inline-flex h-5 items-center rounded-full border border-success/30 bg-success/10 px-2 text-[10px] font-semibold uppercase tracking-wider text-success">
+              Live
+            </span>
+          ) : null}
+        </div>
       </header>
 
       {loading ? (
