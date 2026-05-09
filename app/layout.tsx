@@ -8,18 +8,21 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 })
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta-sans",
   display: "swap",
+  weight: ["500", "600", "700", "800"],
 })
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+  weight: ["400", "500", "600"],
 })
 
 export const metadata: Metadata = {
@@ -28,7 +31,7 @@ export const metadata: Metadata = {
     template: "%s · iDev Lookup",
   },
   description:
-    "Resolve Apple device identifiers like iPhone18,3 and jump to firmware tools, EveryMac, and FMI checker quickly.",
+    "Look up Apple device identifiers like iPhone18,3, see model details, then open EveryMac, IPSW.me, or an FMI checker in one click.",
   keywords: [
     "iDevice",
     "Apple",
@@ -45,7 +48,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "iDev Lookup",
     description:
-      "Resolve identifiers like iPhone18,3 and jump to firmware tools.",
+      "Look up identifiers like iPhone18,3 and open EveryMac, IPSW.me, or an FMI checker quickly.",
     type: "website",
   },
   icons: {

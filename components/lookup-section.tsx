@@ -7,9 +7,12 @@ import {
   Copy,
   Download,
   Heart,
+  Info,
   Loader2,
   Monitor,
+  Search,
   ShieldCheck,
+  Sparkles,
   XCircle,
 } from "lucide-react"
 import {
@@ -47,11 +50,11 @@ export function LookupSection() {
       return
     }
 
-    // Cancel any in-flight request
     abortRef.current?.abort()
     const controller = new AbortController()
     abortRef.current = controller
 
+    setRecord(null)
     setStatus({ kind: "loading", identifier: trimmed })
 
     try {
@@ -70,7 +73,6 @@ export function LookupSection() {
     }
   }, [])
 
-  // Run an initial lookup on mount so the result panel matches the design.
   React.useEffect(() => {
     void performLookup(INITIAL_QUERY)
     return () => {
@@ -121,24 +123,34 @@ export function LookupSection() {
     <section
       id="home"
       aria-labelledby="lookup-heading"
-      className="mx-auto w-full max-w-7xl px-4 pt-5 sm:px-6 lg:px-8 lg:pt-5"
+      className="mx-auto w-full max-w-7xl px-4 pt-3 sm:px-6 sm:pt-4 lg:px-8 lg:pt-4"
     >
-      {/* Title row */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div className="max-w-2xl">
+      {/* Hero */}
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+        <div className="max-w-2xl animate-fade-up">
           <h1
             id="lookup-heading"
-            className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance"
+            className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-[2.5rem]"
           >
-            iDev Lookup
+            <span className="font-bold text-foreground">iDev</span>{" "}
+            <span className="text-gradient font-semibold">Lookup</span>
           </h1>
-          <p className="mt-2 text-sm text-muted-foreground sm:text-base text-pretty">
-            Resolve identifiers like{" "}
-            <span className="font-mono">iPhone18,3</span> and jump to firmware
-            tools.
+          <p className="mt-2 text-pretty text-sm leading-snug text-muted-foreground sm:text-base sm:leading-relaxed">
+            Look up identifiers like{" "}
+            <span className="font-mono text-foreground/90">iPhone18,3</span>,
+            then open <span className="text-foreground/90">EveryMac</span>,{" "}
+            <span className="text-foreground/90">IPSW.me</span>, or an{" "}
+            <span className="text-foreground/90">FMI checker</span> in one
+            click.
           </p>
+          <div className="mt-2.5 flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full border border-primary/20 bg-primary/6 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-primary">
+              <Sparkles className="size-2.5 shrink-0" aria-hidden="true" />
+              Apple device intelligence
+            </span>
+          </div>
         </div>
-        <p className="inline-flex w-fit items-center gap-1.5 self-start rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground shadow-sm sm:self-auto">
+        <p className="inline-flex w-fit animate-fade-up items-center gap-1.5 self-start rounded-full border border-border bg-card/80 px-2.5 py-1 text-[11px] font-medium text-muted-foreground shadow-sm backdrop-blur-sm sm:self-auto sm:px-3 sm:py-1.5 sm:text-xs delay-150">
           <span className="uppercase tracking-wide text-[10px] text-muted-foreground/80">
             Crafted by
           </span>
@@ -148,43 +160,49 @@ export function LookupSection() {
       </div>
 
       {/* Two-column grid */}
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+      <div className="mt-4 grid grid-cols-1 items-stretch gap-4 sm:mt-5 lg:grid-cols-2 lg:gap-6">
         {/* Left: form + actions */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-3 animate-fade-up delay-75">
           <form
             onSubmit={handleSubmit}
-            className="glass-panel rounded-xl border border-border bg-card p-5 sm:p-6"
+            className="glass-panel card-spotlight rounded-2xl border border-border bg-card p-4 sm:p-5"
             noValidate
           >
             <label
               htmlFor="identifier-input"
-              className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+              className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
             >
               Identifier
             </label>
 
             <div className="mt-3 flex flex-col gap-3 xl:flex-row xl:items-stretch">
-              <input
-                ref={inputRef}
-                id="identifier-input"
-                name="identifier"
-                type="text"
-                inputMode="text"
-                autoComplete="off"
-                autoCapitalize="off"
-                spellCheck={false}
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="e.g. iPhone18,3"
-                aria-describedby="identifier-help"
-                className="min-w-0 flex-1 rounded-lg border border-border bg-background px-4 py-2.5 font-mono text-sm text-foreground shadow-sm outline-none ring-ring/50 transition-colors placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2"
-              />
+              <div className="relative min-w-0 flex-1">
+                <Search
+                  className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground/70"
+                  aria-hidden="true"
+                />
+                <input
+                  ref={inputRef}
+                  id="identifier-input"
+                  name="identifier"
+                  type="text"
+                  inputMode="text"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="e.g. iPhone18,3"
+                  aria-describedby="identifier-help"
+                  className="w-full rounded-xl border border-border bg-background/80 py-2.5 pl-10 pr-3 font-mono text-sm text-foreground shadow-sm outline-none ring-ring/50 transition-all placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:bg-background focus-visible:ring-2"
+                />
+              </div>
 
               <div className="flex flex-wrap gap-2">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="cta-sheen inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-70 xl:flex-none"
+                  className="cta-sheen inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl bg-primary px-3.5 text-sm font-semibold text-primary-foreground shadow-[0_8px_24px_-10px_rgba(59,130,246,0.55)] transition-all hover:bg-primary/90 hover:shadow-[0_10px_28px_-8px_rgba(59,130,246,0.65)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-70 sm:px-4 xl:flex-none"
                 >
                   {isLoading ? (
                     <>
@@ -201,7 +219,7 @@ export function LookupSection() {
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="inline-flex h-10 min-w-0 flex-1 items-center justify-center rounded-lg border border-border bg-card px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring xl:flex-none"
+                  className="inline-flex h-10 min-w-0 flex-1 items-center justify-center rounded-xl border border-border bg-card px-3.5 text-sm font-medium text-foreground transition-all hover:border-foreground/15 hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:px-4 xl:flex-none"
                 >
                   Clear
                 </button>
@@ -209,7 +227,7 @@ export function LookupSection() {
                   type="button"
                   onClick={handleCopy}
                   disabled={!canCopy}
-                  className="inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg border border-border bg-card px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 xl:flex-none"
+                  className="inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-3.5 text-sm font-medium text-foreground transition-all hover:border-foreground/15 hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 sm:px-4 xl:flex-none"
                   aria-label="Copy model number to clipboard"
                 >
                   <Copy className="size-3.5" aria-hidden="true" />
@@ -220,9 +238,9 @@ export function LookupSection() {
 
             <div
               id="identifier-help"
-              className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground"
+              className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted-foreground"
             >
-              <span>e.g.</span>
+              <span className="text-muted-foreground/80">Try:</span>
               {EXAMPLE_IDENTIFIERS.map((id) => (
                 <button
                   key={id}
@@ -231,7 +249,7 @@ export function LookupSection() {
                     setQuery(id)
                     void performLookup(id)
                   }}
-                  className="font-mono text-foreground/80 transition-colors hover:text-primary"
+                  className="rounded-full border border-border/60 bg-background/40 px-2.5 py-0.5 font-mono text-[11px] text-foreground/80 transition-all hover:border-primary/50 hover:bg-primary/8 hover:text-primary"
                 >
                   {id}
                 </button>
@@ -263,13 +281,15 @@ export function LookupSection() {
             />
           </div>
 
-          <p className="text-center text-xs text-muted-foreground">
-            Open in browser for deeper checks.
+          <p className="text-center text-[11px] text-muted-foreground sm:text-xs">
+            External links open in a new tab.
           </p>
         </div>
 
         {/* Right: result panel */}
-        <ResultPanel record={record} loading={isLoading} />
+        <div className="flex animate-fade-up flex-col delay-150 lg:h-full">
+          <ResultPanel record={record} loading={isLoading} className="flex-1" />
+        </div>
       </div>
     </section>
   )
@@ -278,14 +298,26 @@ export function LookupSection() {
 /* ---------- Sub-components ---------- */
 
 function StatusBanner({ status }: { status: Status }) {
-  if (status.kind === "idle") return null
+  if (status.kind === "idle") {
+    return (
+      <div className="flex items-center gap-3 rounded-xl border border-border/50 bg-card/60 px-4 py-3">
+        <Info
+          className="size-5 shrink-0 text-muted-foreground/60"
+          aria-hidden="true"
+        />
+        <p className="text-sm text-muted-foreground">
+          Enter an Apple device identifier above to begin.
+        </p>
+      </div>
+    )
+  }
 
   if (status.kind === "loading") {
     return (
       <div
         role="status"
         aria-live="polite"
-        className="glass-panel flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
+        className="glass-panel animate-scale-in flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
       >
         <Loader2
           className="size-5 shrink-0 animate-spin text-primary"
@@ -308,7 +340,7 @@ function StatusBanner({ status }: { status: Status }) {
       <div
         role="status"
         aria-live="polite"
-        className="glass-panel flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
+        className="glass-panel animate-scale-in flex items-center gap-3 rounded-xl border border-success/30 bg-card px-4 py-3"
       >
         <CheckCircle2
           className="size-5 shrink-0 text-success"
@@ -339,7 +371,7 @@ function StatusBanner({ status }: { status: Status }) {
   return (
     <div
       role="alert"
-      className="flex items-start gap-3 rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-3"
+      className="animate-scale-in flex items-start gap-3 rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-3"
     >
       <XCircle
         className="mt-0.5 size-5 shrink-0 text-destructive"
@@ -362,10 +394,10 @@ function QuickAction({
   disabled?: boolean
 }) {
   const className = cn(
-    "glass-panel hover-lift inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-card text-sm font-medium text-foreground shadow-sm transition-colors",
+    "glass-panel card-spotlight hover-lift inline-flex h-11 w-full items-center justify-center gap-2 rounded-xl border border-border bg-card text-xs font-medium text-foreground shadow-sm transition-colors sm:h-12 sm:text-sm",
     disabled || !href
       ? "cursor-not-allowed opacity-50"
-      : "hover:bg-accent hover:text-foreground",
+      : "hover:bg-accent/60 hover:text-foreground",
   )
 
   if (disabled || !href) {
