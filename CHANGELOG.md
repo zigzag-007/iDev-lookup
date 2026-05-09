@@ -2,6 +2,16 @@
 
 All notable changes to **iDev Lookup** are documented in this file.
 
+## [0.2.7] – 2026-05-09
+
+### Fixed
+
+- Applied uniform horizontal-scroll with invisible scrollbar to every result row (Device, Identifier, Family, Model, EMC, EveryMac, Firmware, Signed iOS). No field can overflow or wrap unexpectedly on any screen size.
+- Removed redundant per-field wrapper divs from EveryMac and Firmware rows now that the `dd` element handles overflow directly.
+- Fully suppressed scrollbar track on all WebKit browsers by setting `width: 0; height: 0; background: transparent` instead of `display: none` on `::webkit-scrollbar`.
+
+---
+
 ## [0.2.6] – 2026-05-09
 
 ### Fixed
