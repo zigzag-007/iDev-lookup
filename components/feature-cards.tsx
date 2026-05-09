@@ -13,21 +13,21 @@ interface Feature {
 
 const FEATURES: Feature[] = [
   {
-    icon: <Search className="size-5" aria-hidden="true" />,
+    icon: <Search className="size-[1.125rem]" aria-hidden="true" />,
     title: "Identify any Apple device",
     description:
       "Enter an identifier like iPhone18,3 to get detailed information about the device including model, EMC, and more.",
     tone: "blue",
   },
   {
-    icon: <Download className="size-5" aria-hidden="true" />,
+    icon: <Download className="size-[1.125rem]" aria-hidden="true" />,
     title: "Direct firmware links",
     description:
-      "Jump straight to EveryMac, the signed IPSW on IPSW.me, or run advanced checks with FMI in one tap.",
+      "Jump straight to EveryMac and the signed IPSW on IPSW.me. Use the FMI shortcut for external activation checks.",
     tone: "green",
   },
   {
-    icon: <ShieldCheck className="size-5" aria-hidden="true" />,
+    icon: <ShieldCheck className="size-[1.125rem]" aria-hidden="true" />,
     title: "FMI status check",
     description:
       "Run deeper Find My iPhone status and activation lock checks for any supported Apple device.",
@@ -49,37 +49,37 @@ export function FeatureCards() {
   return (
     <section
       aria-labelledby="features-heading"
-      className="mx-auto w-full max-w-7xl px-4 py-8 sm:px-6 lg:px-8 lg:py-10"
+      className="mx-auto w-full max-w-7xl shrink-0 px-4 pb-5 pt-4 sm:px-6 sm:pb-6 sm:pt-5 lg:px-8"
     >
       <h2 id="features-heading" className="sr-only">
         Features
       </h2>
       <ul
         role="list"
-        className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3"
+        className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-2 lg:grid-cols-3"
       >
         {FEATURES.map((feature, idx) => (
           <li
             key={feature.title}
             className={cn(
-              "glass-panel card-spotlight hover-lift animate-fade-up rounded-2xl border border-border bg-card p-5 sm:p-6",
+              "glass-panel card-spotlight hover-lift animate-fade-up rounded-2xl border border-border bg-card p-4 sm:p-5",
               DELAY_CLASSES[idx],
             )}
           >
             <div className="flex items-start gap-4">
               <span
                 className={cn(
-                  "flex size-12 shrink-0 items-center justify-center rounded-xl shadow-sm",
+                  "flex size-10 shrink-0 items-center justify-center rounded-lg shadow-sm sm:size-11 sm:rounded-xl",
                   TONE_CLASSES[feature.tone],
                 )}
               >
                 {feature.icon}
               </span>
               <div className="min-w-0">
-                <h3 className="text-base font-semibold tracking-tight text-foreground">
+                <h3 className="text-sm font-semibold tracking-tight text-foreground sm:text-base">
                   {feature.title}
                 </h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed text-pretty">
+                <p className="mt-1.5 text-xs text-muted-foreground text-pretty leading-relaxed sm:text-sm">
                   {feature.description}
                 </p>
               </div>

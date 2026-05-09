@@ -2,7 +2,7 @@ import { Heart } from "lucide-react"
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="shrink-0 border-t border-border bg-background">
       <div className="mx-auto w-full max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <p className="flex flex-wrap items-center justify-center gap-x-1.5 gap-y-1 text-center text-[15px] sm:text-base font-semibold text-muted-foreground/80">
           <span>Copyright &copy; 2026 iDev Lookup.</span>

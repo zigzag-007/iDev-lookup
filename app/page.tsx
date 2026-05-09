@@ -6,7 +6,7 @@ import { CursorGlow } from "@/components/cursor-glow"
 
 export default function HomePage() {
   return (
-    <div className="relative flex min-h-dvh flex-col overflow-hidden bg-background">
+    <div className="relative flex min-h-dvh flex-col bg-background">
       <div
         aria-hidden="true"
         className="ambient-grid pointer-events-none absolute inset-0 -z-10 opacity-80"
@@ -22,7 +22,7 @@ export default function HomePage() {
       </div>
       <CursorGlow />
       <SiteHeader />
-      <main id="main" className="flex-1">
+      <main id="main" className="flex flex-1 flex-col">
         <LookupSection />
         <FeatureCards />
       </main>

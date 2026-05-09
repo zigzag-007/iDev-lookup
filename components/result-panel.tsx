@@ -15,9 +15,20 @@ interface RowProps {
   children: React.ReactNode
 }
 
+const SKELETON_WIDTHS: Record<string, string> = {
+  Device: "w-36",
+  Identifier: "w-24",
+  Family: "w-20",
+  Model: "w-24",
+  EMC: "w-16",
+  EveryMac: "w-44",
+  Firmware: "w-56",
+  "Signed iOS": "w-20",
+}
+
 function Row({ label, children }: RowProps) {
   return (
-    <div className="-mx-2 grid grid-cols-[7rem_1fr] items-center gap-4 rounded-lg px-2 py-2.5 transition-colors hover:bg-accent/40 sm:grid-cols-[8rem_1fr]">
+    <div className="-mx-2 grid grid-cols-[7rem_1fr] items-center gap-3 rounded-lg px-2 py-2 transition-colors hover:bg-accent/40 sm:grid-cols-[8rem_1fr] sm:gap-4">
       <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
         {label}
       </dt>
@@ -28,16 +39,19 @@ function Row({ label, children }: RowProps) {
   )
 }
 
-function SkeletonRow({ label, width = "8rem" }: { label: string; width?: string }) {
+function SkeletonRow({ label }: { label: string }) {
+  const w = SKELETON_WIDTHS[label] ?? "w-32"
   return (
-    <div className="-mx-2 grid grid-cols-[7rem_1fr] items-center gap-4 px-2 py-2.5 sm:grid-cols-[8rem_1fr]">
+    <div className="-mx-2 grid grid-cols-[7rem_1fr] items-center gap-3 px-2 py-2 sm:grid-cols-[8rem_1fr] sm:gap-4">
       <dt className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
         {label}
       </dt>
       <dd className="min-w-0">
         <span
-          className="skeleton-shimmer block h-3.5 rounded-full"
-          style={{ width }}
+          className={cn(
+            "skeleton-shimmer block h-3.5 rounded-full",
+            w,
+          )}
           aria-hidden="true"
         />
       </dd>
@@ -49,19 +63,18 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
   return (
     <section
       aria-labelledby="result-heading"
-      aria-busy={loading || undefined}
       className={cn(
-        "glass-panel card-spotlight h-full rounded-2xl border border-border bg-card p-5 sm:p-6",
+        "glass-panel card-spotlight h-full rounded-2xl border border-border bg-card p-4 sm:p-5",
         className,
       )}
     >
-      <header className="flex items-center justify-between border-b border-border/70 pb-3">
+      <header className="flex items-center justify-between border-b border-border/70 pb-2.5">
         <div className="flex items-center gap-2">
           <span
             className={cn(
               "size-2 rounded-full transition-colors",
               loading
-                ? "bg-primary animate-pulse"
+                ? "animate-pulse bg-primary"
                 : record
                   ? "bg-success shadow-[0_0_10px_rgba(34,197,94,0.6)]"
                   : "bg-muted-foreground/40",
@@ -150,17 +163,17 @@ export function ResultPanel({ record, loading, className }: ResultPanelProps) {
         </dl>
       ) : loading ? (
         <dl className="divide-y divide-border/40 pt-1">
-          <SkeletonRow label="Device" width="9rem" />
-          <SkeletonRow label="Identifier" width="6rem" />
-          <SkeletonRow label="Family" width="5rem" />
-          <SkeletonRow label="Model" width="6rem" />
-          <SkeletonRow label="EMC" width="4rem" />
-          <SkeletonRow label="EveryMac" width="11rem" />
-          <SkeletonRow label="Firmware" width="14rem" />
-          <SkeletonRow label="Signed iOS" width="5rem" />
+          <SkeletonRow label="Device" />
+          <SkeletonRow label="Identifier" />
+          <SkeletonRow label="Family" />
+          <SkeletonRow label="Model" />
+          <SkeletonRow label="EMC" />
+          <SkeletonRow label="EveryMac" />
+          <SkeletonRow label="Firmware" />
+          <SkeletonRow label="Signed iOS" />
         </dl>
       ) : (
-        <div className="flex h-full min-h-[18rem] items-center justify-center py-10 text-center">
+        <div className="flex h-full min-h-[11rem] items-center justify-center py-6 text-center sm:min-h-[12rem]">
           <p className="max-w-xs text-sm text-muted-foreground text-pretty">
             Enter an Apple device identifier on the left to see detailed model
             information here.
