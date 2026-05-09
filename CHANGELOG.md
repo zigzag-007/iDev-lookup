@@ -2,6 +2,15 @@
 
 All notable changes to **iDev Lookup** are documented in this file.
 
+## [0.2.6] – 2026-05-09
+
+### Fixed
+
+- Long FIRMWARE and EVERYMAC values now scroll horizontally inside their row cell with an invisible scrollbar instead of overflowing or truncating. Works on all screen sizes including mobile.
+- FIRMWARE value uses monospace font at a smaller size for better readability of long filenames and hashes.
+
+---
+
 ## [0.2.5] – 2026-05-09
 
 ### Added
