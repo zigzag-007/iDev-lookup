@@ -2,6 +2,14 @@
 
 All notable changes to **iDev Lookup** are documented in this file.
 
+## [0.2.8] – 2026-05-09
+
+### Fixed
+
+- EveryMac and Firmware links keep `whitespace-nowrap` on the anchor itself so long URLs and filenames never wrap and horizontal scroll inside each row stays reliable.
+
+---
+
 ## [0.2.7] – 2026-05-09
 
 ### Fixed
