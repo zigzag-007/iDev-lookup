@@ -497,6 +497,15 @@
   background-size: 200% 100%;
 }
 
+/* Hide scrollbar while keeping scroll functionality */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE / Edge legacy */
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome / Safari / WebKit */
+}
+
 /* Focus ring polish */
 .focus-ring {
   outline: none;
