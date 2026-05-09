@@ -9,7 +9,9 @@ import {
   Heart,
   Loader2,
   Monitor,
+  Search,
   ShieldCheck,
+  Sparkles,
   XCircle,
 } from "lucide-react"
 import {
@@ -47,7 +49,6 @@ export function LookupSection() {
       return
     }
 
-    // Cancel any in-flight request
     abortRef.current?.abort()
     const controller = new AbortController()
     abortRef.current = controller
@@ -70,7 +71,6 @@ export function LookupSection() {
     }
   }, [])
 
-  // Run an initial lookup on mount so the result panel matches the design.
   React.useEffect(() => {
     void performLookup(INITIAL_QUERY)
     return () => {
@@ -123,22 +123,26 @@ export function LookupSection() {
       aria-labelledby="lookup-heading"
       className="mx-auto w-full max-w-7xl px-4 pt-5 sm:px-6 lg:px-8 lg:pt-5"
     >
-      {/* Title row */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div className="max-w-2xl">
+      {/* Hero */}
+      <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-2xl animate-fade-up">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-primary/25 bg-primary/8 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-primary backdrop-blur-sm">
+            <Sparkles className="size-3" aria-hidden="true" />
+            Apple device intelligence
+          </span>
           <h1
             id="lookup-heading"
-            className="text-3xl font-semibold tracking-tight text-foreground sm:text-4xl text-balance"
+            className="mt-3 text-4xl font-bold tracking-tight text-foreground sm:text-5xl text-balance"
           >
-            iDev Lookup
+            iDev <span className="text-gradient">Lookup</span>
           </h1>
-          <p className="mt-2 text-sm text-muted-foreground sm:text-base text-pretty">
+          <p className="mt-3 text-sm text-muted-foreground sm:text-base text-pretty leading-relaxed">
             Resolve identifiers like{" "}
-            <span className="font-mono">iPhone18,3</span> and jump to firmware
-            tools.
+            <span className="font-mono text-foreground/90">iPhone18,3</span>{" "}
+            and jump straight to firmware tools, EveryMac, and FMI checks.
           </p>
         </div>
-        <p className="inline-flex w-fit items-center gap-1.5 self-start rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-muted-foreground shadow-sm sm:self-auto">
+        <p className="inline-flex w-fit animate-fade-up items-center gap-1.5 self-start rounded-full border border-border bg-card/80 px-3 py-1.5 text-xs font-medium text-muted-foreground shadow-sm backdrop-blur-sm sm:self-auto delay-150">
           <span className="uppercase tracking-wide text-[10px] text-muted-foreground/80">
             Crafted by
           </span>
@@ -148,43 +152,49 @@ export function LookupSection() {
       </div>
 
       {/* Two-column grid */}
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+      <div className="mt-7 grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
         {/* Left: form + actions */}
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4 animate-fade-up delay-75">
           <form
             onSubmit={handleSubmit}
-            className="glass-panel rounded-xl border border-border bg-card p-5 sm:p-6"
+            className="glass-panel card-spotlight rounded-2xl border border-border bg-card p-5 sm:p-6"
             noValidate
           >
             <label
               htmlFor="identifier-input"
-              className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+              className="text-[11px] font-semibold uppercase tracking-[0.16em] text-muted-foreground"
             >
               Identifier
             </label>
 
             <div className="mt-3 flex flex-col gap-3 xl:flex-row xl:items-stretch">
-              <input
-                ref={inputRef}
-                id="identifier-input"
-                name="identifier"
-                type="text"
-                inputMode="text"
-                autoComplete="off"
-                autoCapitalize="off"
-                spellCheck={false}
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="e.g. iPhone18,3"
-                aria-describedby="identifier-help"
-                className="min-w-0 flex-1 rounded-lg border border-border bg-background px-4 py-2.5 font-mono text-sm text-foreground shadow-sm outline-none ring-ring/50 transition-colors placeholder:text-muted-foreground focus-visible:border-primary focus-visible:ring-2"
-              />
+              <div className="relative min-w-0 flex-1">
+                <Search
+                  className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground/70"
+                  aria-hidden="true"
+                />
+                <input
+                  ref={inputRef}
+                  id="identifier-input"
+                  name="identifier"
+                  type="text"
+                  inputMode="text"
+                  autoComplete="off"
+                  autoCapitalize="off"
+                  spellCheck={false}
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="e.g. iPhone18,3"
+                  aria-describedby="identifier-help"
+                  className="w-full rounded-xl border border-border bg-background/80 py-3 pl-10 pr-3 font-mono text-sm text-foreground shadow-sm outline-none ring-ring/50 transition-all placeholder:text-muted-foreground/70 focus-visible:border-primary focus-visible:bg-background focus-visible:ring-2"
+                />
+              </div>
 
               <div className="flex flex-wrap gap-2">
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="cta-sheen inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-primary px-4 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-70 xl:flex-none"
+                  className="cta-sheen inline-flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-[0_8px_24px_-10px_rgba(59,130,246,0.55)] transition-all hover:bg-primary/90 hover:shadow-[0_10px_28px_-8px_rgba(59,130,246,0.65)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-70 xl:flex-none"
                 >
                   {isLoading ? (
                     <>
@@ -201,7 +211,7 @@ export function LookupSection() {
                 <button
                   type="button"
                   onClick={handleClear}
-                  className="inline-flex h-10 min-w-0 flex-1 items-center justify-center rounded-lg border border-border bg-card px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring xl:flex-none"
+                  className="inline-flex h-11 min-w-0 flex-1 items-center justify-center rounded-xl border border-border bg-card px-4 text-sm font-medium text-foreground transition-all hover:bg-accent hover:border-foreground/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring xl:flex-none"
                 >
                   Clear
                 </button>
@@ -209,7 +219,7 @@ export function LookupSection() {
                   type="button"
                   onClick={handleCopy}
                   disabled={!canCopy}
-                  className="inline-flex h-10 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg border border-border bg-card px-4 text-sm font-medium text-foreground transition-colors hover:bg-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 xl:flex-none"
+                  className="inline-flex h-11 min-w-0 flex-1 items-center justify-center gap-1.5 rounded-xl border border-border bg-card px-4 text-sm font-medium text-foreground transition-all hover:bg-accent hover:border-foreground/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 xl:flex-none"
                   aria-label="Copy model number to clipboard"
                 >
                   <Copy className="size-3.5" aria-hidden="true" />
@@ -220,9 +230,9 @@ export function LookupSection() {
 
             <div
               id="identifier-help"
-              className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground"
+              className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5 text-xs text-muted-foreground"
             >
-              <span>e.g.</span>
+              <span className="text-muted-foreground/80">Try:</span>
               {EXAMPLE_IDENTIFIERS.map((id) => (
                 <button
                   key={id}
@@ -231,7 +241,7 @@ export function LookupSection() {
                     setQuery(id)
                     void performLookup(id)
                   }}
-                  className="font-mono text-foreground/80 transition-colors hover:text-primary"
+                  className="rounded-full border border-border/60 bg-background/40 px-2.5 py-0.5 font-mono text-[11px] text-foreground/80 transition-all hover:border-primary/50 hover:bg-primary/8 hover:text-primary"
                 >
                   {id}
                 </button>
@@ -269,7 +279,9 @@ export function LookupSection() {
         </div>
 
         {/* Right: result panel */}
-        <ResultPanel record={record} loading={isLoading} />
+        <div className="animate-fade-up delay-150">
+          <ResultPanel record={record} loading={isLoading} />
+        </div>
       </div>
     </section>
   )
@@ -285,7 +297,7 @@ function StatusBanner({ status }: { status: Status }) {
       <div
         role="status"
         aria-live="polite"
-        className="glass-panel flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
+        className="glass-panel animate-scale-in flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
       >
         <Loader2
           className="size-5 shrink-0 animate-spin text-primary"
@@ -308,7 +320,7 @@ function StatusBanner({ status }: { status: Status }) {
       <div
         role="status"
         aria-live="polite"
-        className="glass-panel flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3"
+        className="glass-panel animate-scale-in flex items-center gap-3 rounded-xl border border-success/30 bg-card px-4 py-3"
       >
         <CheckCircle2
           className="size-5 shrink-0 text-success"
@@ -339,7 +351,7 @@ function StatusBanner({ status }: { status: Status }) {
   return (
     <div
       role="alert"
-      className="flex items-start gap-3 rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-3"
+      className="animate-scale-in flex items-start gap-3 rounded-xl border border-destructive/40 bg-destructive/10 px-4 py-3"
     >
       <XCircle
         className="mt-0.5 size-5 shrink-0 text-destructive"
@@ -362,10 +374,10 @@ function QuickAction({
   disabled?: boolean
 }) {
   const className = cn(
-    "glass-panel hover-lift inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-card text-sm font-medium text-foreground shadow-sm transition-colors",
+    "glass-panel card-spotlight hover-lift inline-flex h-14 w-full items-center justify-center gap-2 rounded-xl border border-border bg-card text-sm font-medium text-foreground shadow-sm transition-colors",
     disabled || !href
       ? "cursor-not-allowed opacity-50"
-      : "hover:bg-accent hover:text-foreground",
+      : "hover:bg-accent/60 hover:text-foreground",
   )
 
   if (disabled || !href) {

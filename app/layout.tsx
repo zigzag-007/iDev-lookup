@@ -8,18 +8,21 @@ const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 })
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta-sans",
   display: "swap",
+  weight: ["500", "600", "700", "800"],
 })
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains-mono",
   display: "swap",
+  weight: ["400", "500", "600"],
 })
 
 export const metadata: Metadata = {
